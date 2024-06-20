@@ -97,7 +97,8 @@ STATIC_URL = '/static_backend/'
 STATIC_ROOT = BASE_DIR / 'static_backend' 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/wwww/kittygram/media/'
+#MEDIA_ROOT = '/var/wwww/kittygram/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
