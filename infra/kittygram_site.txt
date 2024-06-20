@@ -1,0 +1,5 @@
+IP: 158.160.91.227;
+name_taski: https://taskdo.zapto.org;
+name_kittygram: https://kittydo.zapto.org;
+login: khadakhan;
+password: 1234;
