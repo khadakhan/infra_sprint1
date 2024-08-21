@@ -83,6 +83,10 @@ nano settings.py
 # Вместо xxx.xxx.xxx.xxx укажите IP вашего сервера.
 ALLOWED_HOSTS = ['xxx.xxx.xxx.xxx', '127.0.0.1', 'localhost'] 
 ```
+Запускаем сервер командой:
+```
+python manage.py runserver 0:9000
+```
 Теперь можно перейти в админку по ссылке http://ваш_публичный_IP:8000/admin/ и авторизоваться от имени созданного вами суперпользователя или можно перейти по ссылке http://ваш_публичный_IP:8000/api/, чтобы открыть встроенный интерфейс отладки Browsable API.
 Останавливаем бекэнд сервер.
 
@@ -336,48 +340,48 @@ blank to select all options shown (Enter 'c' to cancel):
 Откройте файл /etc/nginx/sites-enabled/default и убедитесь в этом:
 ```
 server {
+    server_name 158.160.91.227 kittydo.zapto.org;
 
-        server_name ваш_ip ваше_доменное_имя;
+    location / {
+        root   /var/www/kittygram;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
 
     location /api/ {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:9000;
     }
 
     location /admin/ {
-        proxy_pass http://127.0.0.1:8000;
+        proxy_pass http://127.0.0.1:9000;
     }
 
-    location / {
-
-        root   /var/www/Taski;
-        index  index.html index.htm;
-        try_files $uri /index.html =404;
-        }
+    location /media/ {
+        root /var/www/kittygram;
+    }
 
 # Далее идут новые настройки и описание путей к сертификату.
 
-    listen 443 ssl;
-    ssl_certificate /etc/letsencrypt/live/testtaski.hopto.org/fullchain.pem; 
-    ssl_certificate_key /etc/letsencrypt/live/testtaski.hopto.org/privkey.pem; 
-    include /etc/letsencrypt/options-ssl-nginx.conf; 
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/kittydo.zapto.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/kittydo.zapto.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
 }
 
 server {
-    if ($host = ваше_доменное_имя) {
+    if ($host = kittydo.zapto.org) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
 
 
-
-    listen       80;
-
-    server_name server_name ваш_ip ваше_доменное_имя;
+    server_name 158.160.91.227 kittydo.zapto.org;
+    listen 80;
     return 404; # managed by Certbot
 
 
-} 
+}
 ```
 Перезагрузите конфигурацию Nginx:
 ```
