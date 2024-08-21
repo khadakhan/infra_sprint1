@@ -414,4 +414,32 @@ sudo certbot renew --pre-hook "service nginx stop" --post-hook "service nginx st
 ```
 Эта команда обновит сертификат и перезапустит nginx.
 
+## Полезные команды:
+Остановить процессы:
+```
+pkill gunicorn (или номер процесса)
+```
+чем занят порт
+```
+sudo lsof -i tcp:8080
+```
+освободить порт
+```
+sudo fuser -k 8080/tcp
+```
+остановить Django server
+```
+pkill -f runserver
+```        
+проверить место на сервере
+```
+sudo df
+```
+копировал на сервер файлы:
+```
+scp -i "C:\Dev\vm_access\yc-khadakhanoff"/yc-khadakhanoff docs \
+    yc-user@158.160.91.227:/home/yc-user/foodgram/docs
+```
+
+
 Автор проекта: [khadakhan](https://github.com/khadakhan/)
