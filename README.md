@@ -1,6 +1,8 @@
 # About project infra_sprint1 (kittygram)
 Kittygram is a social network for sharing photos of your favorite pets. This project consists of a backend application on Django and a frontend application on React.
 
+In the application, you can register and post photos of your pets with descriptions of their achievements, as well as edit and delete them.
+
 # Deploy a project to a server:
 To connect to your server via SSH, you will need the following data:
 * Get a domain name that will allow the application to be accessed. (For example, kittydo.zapto.org)
