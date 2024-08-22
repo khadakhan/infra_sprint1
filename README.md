@@ -234,10 +234,12 @@ server {
     }
 
     location /api/ {
+        client_max_body_size 20M;
         proxy_pass http://127.0.0.1:9000;
     }
 
     location /admin/ {
+        client_max_body_size 20M;
         proxy_pass http://127.0.0.1:9000;
     }
 
@@ -349,10 +351,12 @@ server {
     }
 
     location /api/ {
+        client_max_body_size 20M;
         proxy_pass http://127.0.0.1:9000;
     }
 
     location /admin/ {
+        client_max_body_size 20M;
         proxy_pass http://127.0.0.1:9000;
     }
 
