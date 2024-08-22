@@ -1,4 +1,4 @@
-# About project infra_sprint1 (kitygram)
+# About project infra_sprint1 (kittygram)
 Kittygram is a social network for sharing photos of your favorite pets. This project consists of a backend application on Django and a frontend application on React.
 
 # Deploy a project to a server:
