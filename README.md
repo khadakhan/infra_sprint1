@@ -457,7 +457,7 @@ scp -i "C:\Dev\vm_access\yc-khadakhanoff"/yc-khadakhanoff docs \
 yc-user@158.160.91.227:/home/yc-user/foodgram/docs
 ```
 
-# instruments and stack
+# Instruments and stack
 #python #javascript #css #django #djangorestframework #REST API #bash #gunicorn #nginx #SSH #base64
 
 # Author
