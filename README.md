@@ -36,8 +36,8 @@ git --version
 While on the server, generate a pair of SSH keys, output the public key to the console, copy it and write it to your GitHub account settings.
 (you can follow [the instructions](https://file.notion.so/f/f/1c00a917-6a50-4d8a-a607-d24904249cd0/cce9043b-0706-44bc-9730-53923cef05ab/Настройка_SSH_для_GitHub.pdf?table=block&id=2ccd2557-d585-4e6d-980b-b0a3319229cd&spaceId=1c00a917-6a50-4d8a-a607-d24904249cd0&expirationTimestamp=1724284800000&signature=FpJxT18lS-aTUEcG6PS41N-sm05oMkufeXhAAnlMZjc&downloadName=Настройка+SSH+для+GitHub.pdf))
 
-### Клонируйте код приложения с GitHub на сервер:
-Находясь на сервере, выполните команду:
+### Clone the application code from GitHub to the server:
+While on the server, run the command:
 ```
 git clone git@github.com:Ваш_аккаунт/taski.git
 ```
