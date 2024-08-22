@@ -1,37 +1,38 @@
-# infra_sprint1
-Kittygram — социальная сеть для обмена фотографиями любимых питомцев. Это проект, который состоит из бэкенд-приложения на Django и фронтенд-приложения на React.
-# Как развернуть проект на сервере:
-Для подключения к Вашему серверу по протоколу SSH Вам понадобятся следующие данные:
-* Получите доменное имя, по которому будет доступно приложение.(Например, kittydo.zapto.org)
-* login для подключения к серверу;
-* ip - IP-адреc сервера, а также желательно доменное имя;
-* passphrase - пароль от закрытого SSH-ключа;
-* файл с расширением .pub — открытый SSH-ключ;
-* файл без расширения — закрытый SSH-ключ.
+# About project infra_sprint1 (kitygram)
+Kittygram is a social network for sharing photos of your favorite pets. This project consists of a backend application on Django and a frontend application on React.
 
-Если вы работаете под ОС Linux или macOS, то у вас наверняка есть SSH-клиент, он по умолчанию встроен в терминал.
-Пользователям Windows мы рекомендуем установить Git Bash версии 2.36.0 или выше. SSH-клиент встроен в этот терминал.
-Чтобы убедиться, что SSH-клиент у Вас есть, откройте терминал и введите команду:
+# Deploy a project to a server:
+To connect to your server via SSH, you will need the following data:
+* Get a domain name that will allow the application to be accessed. (For example, kittydo.zapto.org)
+* login to connect to the server;
+* ip - the server IP address, and preferably a domain name;
+* passphrase - the password for the private SSH key;
+* a file with the .pub extension is the public SSH key;
+* a file without an extension is the private SSH key.
+
+If you are running Linux or macOS, you probably have an SSH client, it is built into the terminal by default.
+For Windows users, we recommend installing Git Bash version 2.36.0 or higher. The SSH client is built into this terminal.
+To make sure you have an SSH client, open the terminal and enter the command:
 ```
 ssh -V
 ```
-Для подключения  к серверу используйте команду:
+To connect to the server, use the command:
 ```
-ssh -i путь_до_файла_с_SSH_ключом/название_файла_закрытого_SSH-ключа login@ip
+ssh -i <path to_file_with_SSH_key>/<name of private SSH key> file login@ip
 ```
-## Подключить удаленный сервер к аккаунту на GitHub
-Установить на сервере git, используя команду:
+## Connect a remote server to your GitHub account
+Install git on the server using the command:
 ```
-sudo apt install <имя_пакета>
+sudo apt install <package_name>
 ```
-или проверьте, что git уже установлен:
+or check that git is already installed:
 ```
 sudo apt update
 git --version
 ```
 
-Находясь на сервере, сгенерируйте пару SSH-ключей, выведите публичный ключ в консоль, скопируйте его и запишите в настройки вашего аккаунта на GitHub.
-(можно по [инструкции](https://file.notion.so/f/f/1c00a917-6a50-4d8a-a607-d24904249cd0/cce9043b-0706-44bc-9730-53923cef05ab/Настройка_SSH_для_GitHub.pdf?table=block&id=2ccd2557-d585-4e6d-980b-b0a3319229cd&spaceId=1c00a917-6a50-4d8a-a607-d24904249cd0&expirationTimestamp=1724284800000&signature=FpJxT18lS-aTUEcG6PS41N-sm05oMkufeXhAAnlMZjc&downloadName=Настройка+SSH+для+GitHub.pdf))
+While on the server, generate a pair of SSH keys, output the public key to the console, copy it and write it to your GitHub account settings.
+(you can follow [the instructions](https://file.notion.so/f/f/1c00a917-6a50-4d8a-a607-d24904249cd0/cce9043b-0706-44bc-9730-53923cef05ab/Настройка_SSH_для_GitHub.pdf?table=block&id=2ccd2557-d585-4e6d-980b-b0a3319229cd&spaceId=1c00a917-6a50-4d8a-a607-d24904249cd0&expirationTimestamp=1724284800000&signature=FpJxT18lS-aTUEcG6PS41N-sm05oMkufeXhAAnlMZjc&downloadName=Настройка+SSH+для+GitHub.pdf))
 
 ### Клонируйте код приложения с GitHub на сервер:
 Находясь на сервере, выполните команду:
@@ -39,190 +40,196 @@ git --version
 git clone git@github.com:Ваш_аккаунт/taski.git
 ```
 
-1. Установливаем на сервер необходимые компоненты: интерпретатор Python, менеджер пакетов pip, утилиту для создания виртуального окружения venv. Если Ваш сервер работает под управлением операционной системы Ubuntu, в неё предустановлен интерпретатор Python третьей версии. Убедитесь в этом — находясь на сервере, выполните команду:
+1. Install the necessary components on the server: Python interpreter, pip package manager, utility for creating a virtual environment venv. If your server is running Ubuntu, the third version of Python interpreter is pre-installed. Make sure of this - while on the server, run the command:
 
 ```
 python3 -V
 ```
-Далее установите на сервер пакетный менеджер и утилиту для создания виртуального окружения. Сделать это можно одной командой, перечислив все необходимые к установке пакеты:
+Next, install the package manager and utility for creating a virtual environment on the server. This can be done with one command, listing all the packages required for installation:
 
 ```
-sudo apt install python3-pip python3-venv -y 
+sudo apt install python3-pip python3-venv -y
 ```
 
-2. Установить зависимости из файла requirements.txt:
+2. Install dependencies from the requirements.txt file:
 ```
-# Переходим в директорию backend-приложения проекта.
+# Go to the project's backend application directory.
 cd taski/backend/
-# Создаём виртуальное окружение.
+# Create a virtual environment.
 python3 -m venv venv
-# Активируем виртуальное окружение.
+# Activate the virtual environment.
 source venv/bin/activate
-# Обновляем pip в виртуальном окружении
+# Update pip in the virtual environment
 pip install --upgrade pip
-# Устанавливаем зависимости.
+# Install dependencies.
 pip install -r requirements.txt
 ```
-3. Выполнить миграции и создайте суперпользователя:
+
+3. Run migrations and create a superuser:
 ```
-# Применяем миграции.
+# Apply migrations.
 python manage.py migrate
-# Создаём суперпользователя.
+# Create a superuser.
 python manage.py createsuperuser
 ```
-## Запускаем бекэнд
-Чтобы проект запустился через внешний интерфейс, нужно явно добавить IP-адрес вашего сервера в «список разрешённых хостов» ALLOWED_HOSTS в файл settings.py:
+
+## Launching the backend
+To launch the project via the external interface, you need to explicitly add your server's IP address to the ALLOWED_HOSTS "allowed hosts list" in the settings.py file:
 ```
-# Открываем файл settings.py
+# Open the settings.py file
 nano settings.py
 ```
-В список ALLOWED_HOSTS добавьте:
-внешний IP-адрес вашего сервера для доступа к приложению по внешнему интерфейсу,
-адреса 127.0.0.1 и localhost для доступа к приложению по внутреннему интерфейсу:
+Add to the ALLOWED_HOSTS list:
+your server's external IP address to access the application via the external interface,
+the addresses 127.0.0.1 and localhost to access the application via the internal interface:
 ```
-# Вместо xxx.xxx.xxx.xxx укажите IP вашего сервера.
-ALLOWED_HOSTS = ['xxx.xxx.xxx.xxx', '127.0.0.1', 'localhost'] 
+# Replace xxx.xxx.xxx.xxx with your server's IP.
+ALLOWED_HOSTS = ['xxx.xxx.xxx.xxx', '127.0.0.1', 'localhost']
 ```
-Запускаем сервер командой:
+Start the server with the command:
 ```
 python manage.py runserver 0:9000
 ```
-Теперь можно перейти в админку по ссылке http://ваш_публичный_IP:8000/admin/ и авторизоваться от имени созданного вами суперпользователя или можно перейти по ссылке http://ваш_публичный_IP:8000/api/, чтобы открыть встроенный интерфейс отладки Browsable API.
-Останавливаем бекэнд сервер.
+Now you can go to the admin panel using the link http://your_public_IP:8000/admin/ and log in as the superuser you created, or you can follow the link http://your_public_IP:8000/api/ to open the built-in Browsable API debugging interface.
+Stop the backend server.
 
-## Запускаем фронтенд
-Фронтенд-приложение проекта Taski написано на React. Чтобы его запустить, нужно:
-* Установить на сервер пакетный менеджер npm. Самый простой способ начать работу с npm — это установить на сервер Node.js, с которой менеджер пакетов идёт в комплекте. Находясь на сервере, из любой директории выполните команду (скопируйте её целиком и вставьте в терминал):
+## Launching the frontend
+The Taski project's frontend application is written in React. To launch it, you need to:
+* Install the npm package manager on the server. The easiest way to get started with npm is to install Node.js on the server, which comes with the package manager. While on the server, run the command from any directory (copy it entirely and paste it into the terminal):
 ```
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
 sudo apt install -y nodejs
 ```
-После установки Node.js сервер, скорее всего, снова попросит перезагрузить операционную систему. Перезагружайте её и двигайтесь дальше.
-Далее убедитесь, что пакетный менеджер npm тоже установился. Выполните команду:
+After installing Node.js, the server will most likely ask you to reboot the operating system again. Reboot it and move on.
+Next, make sure that the npm package manager is also installed. Run the command:
 ```
 npm -v
 ```
-В ответ должна вывестись версия пакетного менеджера.
-* Установить зависимости для фронтенд-приложения. Перейдите в директорию taski/frontend/ и выполните команду:
+The response should display the version of the package manager.
+* Install dependencies for the frontend application. Go to the taski/frontend/ directory and run the command:
 ```
 npm i
 ```
-Запустите приложение командой:
+Run the application with the command:
 ```
 npm run start
 ```
-проверяем по по ссылке http://ваш_публичный_IP:3000 и останавливаем фронтенд сервер.
-## Устанавливаем и запускаем Gunicorn
-На удалённом сервере при активированном виртуальном окружении проекта Taski установите пакет gunicorn:
+check by the link http://your_public_IP:3000 and stop the frontend server.
+
+## Install and run Gunicorn
+On the remote server, with the Taski project virtual environment activated, install the gunicorn package:
 ```
 pip install gunicorn==20.1.0
 ```
-Перейдите в директорию с файлом manage.py (infra_sprint1/backend) и запустите Gunicorn:
+Go to the directory with the manage.py file (infra_sprint1/backend) and run Gunicorn:
 ```
 gunicorn --bind 0.0.0.0:9000 kittygram_backend.wsgi
 ```
-Создаём юнит для Gunicorn. В директории /etc/systemd/system/ создайте файл gunicorn_kittygram.service и откройте его в Nano. Для создания файла в системной папке нужны права администратора, их даёт команда sudo. Выполните команду:
+Create a unit for Gunicorn. In the /etc/systemd/system/ directory, create the gunicorn_kittygram.service file and open it in Nano. To create a file in the system folder, you need administrator rights, which are provided by the sudo command. Run the command:
 ```
-sudo nano /etc/systemd/system/gunicorn_kittygram.service 
+sudo nano /etc/systemd/system/gunicorn_kittygram.service
+
 ```
-В файле gunicorn_kittygram.service опишите конфигурацию процесса. 
-Подставьте в код из листинга свои данные, добавьте этот код без комментариев в файл gunicorn_kittygram.service и сохраните изменения:
+Describe the process configuration in the gunicorn_kittygram.service file.
+
+Substitute your data into the code from the listing, add this code without comments to the gunicorn_kittygram.service file and save the changes:
 ```
 [Unit]
-# Это текстовое описание юнита, пояснение для разработчика.
-Description=gunicorn_kittygram daemon 
+# This is a text description of the unit, an explanation for the developer.
+Description=gunicorn_kittygram daemon
 
-# Условие: при старте операционной системы запускать процесс только после того, 
-# как операционная система загрузится и настроит подключение к сети.
-# Ссылка на документацию с возможными вариантами значений 
+# Condition: when starting the operating system, start the process only after
+# the operating system has loaded and configured a network connection.
+# Link to documentation with possible value options
 # https://systemd.io/NETWORK_ONLINE/
-After=network.target 
+After=network.target
 
 [Service]
-# От чьего имени будет происходить запуск:
-# укажите имя пользователя, под которым вы подключались к серверу по ssh.
-User=yc-user 
+# On whose behalf the launch will occur:
+# specify the user name under which you connected to the server via ssh.
+User=yc-user
 
-# Путь к директории проекта:
-# /home/<имя-пользователя-в-системе>/
-# <директория-с-проектом>/<директория-с-файлом-manage.py>/.
-# Например:
+# Path to the project directory:
+# /home/<user-name-in-the-system>/
+# <directory-with-the-project>/<directory-with-the-manage.py-file>/.
+# For example:
 WorkingDirectory=/home/yc-user/infra_sprint1/backend/
 
-# Команду, которую вы запускали руками, теперь будет запускать systemd:
-# /home/<имя-пользователя-в-системе>/
-# <директория-с-проектом>/<путь-до-gunicorn-в-виртуальном-окружении> --bind 0.0.0.0:9000 kittygram_backend.wsgi
+# The command you ran manually will now be run by systemd:
+# /home/<user-name-on-the-system>/
+# <directory-with-the-project>/<path-to-gunicorn-in-the-virtual-environment> --bind 0.0.0.0:9000 kittygram_backend.wsgi
 ExecStart=/home/yc-user/taski/backend/venv/bin/gunicorn --bind 0.0.0.0:9000 kittygram_backend.wsgi
 
 [Install]
-# В этом параметре указывается вариант запуска процесса.
-# Значение <multi-user.target> указывают, чтобы systemd запустил процесс,
-# доступный всем пользователям и без графического интерфейса.
+# This parameter specifies the option to start the process.
+# The <multi-user.target> value specifies that systemd will start a process that is
+# accessible to all users and without a graphical interface.
 WantedBy=multi-user.target
 ```
-Для просмотра процессов вопользуемся командой:
+To view processes, use the command:
 ```
 sudo systemctl
 ```
-Чтобы запустить, остановить или перезапустить процесс, используется команда sudo systemctl с параметрами start, stop или restart.
-Запустите процесс gunicorn_kittygram.service:
+To start, stop, or restart a process, use the sudo systemctl command with the start, stop, or restart parameters.
+Start the gunicorn_kittygram.service process:
 ```
 sudo systemctl start gunicorn_kittygram
 ```
-Дополнительной командой добавьте процесс Gunicorn в список автозапуска операционной системы на удалённом сервере:
+Add the Gunicorn process to the startup list of the operating system on the remote server with an additional command:
 ```
 sudo systemctl enable gunicorn_kittygram
 ```
-После небольшого ожидания можно будет проверить работоспособность запущенного демона. Для этого воспользуйтесь командой:
+After a short wait, you can check the functionality of the running daemon. To do this, use the command:
 ```
 sudo systemctl status gunicorn_kittygram
 ```
- Вы установили и настроили WSGI-сервер Gunicorn: он будет запускаться при старте операционной системы на удалённом сервере, а если возникнут проблемы — автоматически перезагрузится. Вручную им тоже можно управлять, для этого есть команды sudo systemctl start/stop/restart gunicorn.
+You have installed and configured the Gunicorn WSGI server: it will start when the operating system on the remote server starts, and if problems arise, it will automatically reboot. You can also manage it manually, for this there are commands sudo systemctl start/stop/restart gunicorn.
 
- ## Веб- и обратный прокси-сервер Nginx: установка и настройка
- Находясь на удалённом сервере, из любой директории выполните команду:
- ```
- sudo apt install nginx -y
- ```
- Далее сервер, скорее всего, попросит вас перезагрузить операционную систему — сделайте это. А потом запустите Nginx командой:
- ```
- sudo systemctl start nginx
- ```
- Нужно оставить возможность отправлять запросы только на некоторые порты, например:
-* 80 — HTTP;
-* 443 — HTTPS;
-* 22 — SSH.
-В комплекте с операционной системой Ubuntu идёт файрвол ufw, но по умолчанию он выключен. Задача — указать порты, которые нужно открыть, и включить программу. Укажите файрволу, какие порты должны остаться открытыми. Для этого выполните на сервере две команды по очереди:
+## Nginx web and reverse proxy server: installation and configuration
+From the remote server, run the command from any directory:
+```
+sudo apt install nginx -y
+```
+Next, the server will most likely ask you to reboot the operating system - do this. And then start Nginx with the command:
+```
+sudo systemctl start nginx
+```
+You need to leave the ability to send requests only to some ports, for example:
+* 80 - HTTP;
+* 443 - HTTPS;
+* 22 - SSH.
+The Ubuntu operating system comes with a firewall ufw, but it is disabled by default. The task is to specify the ports that need to be opened and enable the program. Tell the firewall which ports should remain open. To do this, run two commands on the server one after the other:
 ```
 sudo ufw allow 'Nginx Full'
 sudo ufw allow OpenSSH
 ```
-Команда sudo ufw allow OpenSSH активирует разрешение для порта 22 — это стандартный порт для соединения по SSH. Если этот порт не открыть, то доступ к удалённому серверу будет закрыт сразу после включения файрвола, и вы туда больше не попадёте. Теперь включите файрвол:
+The sudo ufw allow OpenSSH command enables permission for port 22 — this is the standard port for connecting via SSH. If this port is not opened, then access to the remote server will be closed immediately after turning on the firewall, and you will no longer be able to get there. Now turn on the firewall:
 ```
 sudo ufw enable
 ```
-Далее проверьте внесённые изменения:
+Next, check the changes you made:
 ```
 sudo ufw status
 ```
-Файрвол ufw сообщит вам, что он «активен» и разрешает принимать запросы на порты, которые вы указали.
+The ufw firewall will tell you that it is “active” and allows you to receive requests on the ports you specified.
 
-Собираем статику фронтенд-приложения. Перейдите в директорию infra_sprint1/frontend и выполните команду:
+Collecting statics for the frontend application. Go to the infra_sprint1/frontend directory and run the command:
 ```
 npm run build
 ```
-Чтобы Nginx раздавал статику, он должен знать, где она лежит. У веб-сервера есть системная директория, которую он использует по умолчанию для доступа к статическим файлам, — /var/www/. Скопируйте в эту директорию содержимое папки .../frontend/build/:
+For Nginx to serve static files, it needs to know where they are. The web server has a system directory that it uses by default to access static files — /var/www/. Copy the contents of the .../frontend/build/ folder to this directory:
 ```
-# Команда cp — копировать, ключ -r — рекурсивно, включая вложенные папки и файлы.
-sudo cp -r /home/yc-user/infra_sprint1/frontend/build/. /var/www/kittygram/ 
-# Точка после build важна — будет скопировано содержимое директории.
+# The cp command — copy, the -r switch — recursively, including nested folders and files.
+sudo cp -r /home/yc-user/infra_sprint1/frontend/build/. /var/www/kittygram/
+# The dot after build is important — the contents of the directory will be copied.
 ```
-Описываем настройки для работы со статикой фронтенд-приложения:
+We describe the settings for working with the statics of the frontend application:
 ```
- sudo nano /etc/nginx/sites-enabled/default
- ```
- В этом файле уже есть первоначальные настройки для работы веб-сервера. Именно поэтому при обращении по IP-адресу сервера отображается стартовая страница Nginx. 
-Удалите все настройки из файла, запишите и сохраните новые.Настраиваем сразу проксирование запросов:
+sudo nano /etc/nginx/sites-enabled/default
+```
+This file already contains the initial settings for the web server. That is why when accessing the server's IP address, the Nginx start page is displayed.
+
+Delete all the settings from the file, write down and save the new ones. We set up proxying of requests right away:
 ```
 server {
     server_name 158.160.91.227 kittydo.zapto.org;
@@ -247,99 +254,102 @@ server {
         root /var/www/kittygram;
 }
 ```
-Сохраните изменения, проверьте и перезагрузите конфигурацию веб-сервера:
+Save the changes, check and reload the web server configuration:
 ```
 sudo nginx -t
 sudo systemctl reload nginx
 ```
-Чтобы подготовить бэкенд-приложение для сбора статики, в файле settings.py укажите директорию, куда эту статику нужно сложить. 
-Через редактор Nano откройте файл settings.py, укажите новое значение для константы STATIC_URL и создайте константу STATIC_ROOT:
+To prepare the backend application for collecting statics, in the settings.py file, specify the directory where this static should be stored.
+
+Using the Nano editor, open the settings.py file, specify a new value for the STATIC_URL constant and create a STATIC_ROOT constant:
 ```
-# Замените стандартное значение 'static' на 'static_backend',
-# чтобы не было конфликта запросов к статике фронтенда и бэкенда.
+# Replace the default value 'static' with 'static_backend',
+# to avoid a conflict of requests to the frontend and backend statics.
 STATIC_URL = '/static_backend/'
-# Укажите директорию, куда бэкенд-приложение должно сложить статику.
+# Specify the directory where the backend application should store the statics.
 STATIC_ROOT = BASE_DIR / 'static_backend'
 ```
-На удалённом сервере при активированном виртуальном окружении перейдите в директорию с файлом manage.py и выполните команду:
+On the remote server, with the virtual environment activated, go to the directory with the manage.py file and run the command:
 ```
 python manage.py collectstatic
 ```
-В директории проекта infra_sprint1/backend/ будет создана директория static_backend/ со всей статикой бэкенд-приложения. Вот такой ответ терминала подтверждает это:
+A static_backend/ directory will be created in the infra_sprint1/backend/ project directory with all the static files of the backend application. This terminal response confirms this:
 ```
 161 static files copied to '/home/yc-user/infra_sprint1/backend/static_backend'.
 ```
-Перейдите в корень проекта Infra_sprint1 и скопируйте директорию static_backend/ в директорию /var/www/kittygram/. Для этого выполните команду:
+Go to the root of the Infra_sprint1 project and copy the static_backend/ directory to the /var/www/kittygram/ directory. To do this, run the command:
 ```
 sudo cp -r /home/yc-user/infra_sprint1/backend/static_backend/ /var/www/kittygram/
 ```
-Чтобы изменения в файле settings.py вступили в силу, перезапустите Gunicorn:
+For the changes in the settings.py file to take effect, restart Gunicorn:
 ```
 sudo systemctl restart gunicorn
 ```
-## Добавление доменного имени в настройки Django
-Находясь на сервере, перейдите в директорию /infra_sprint1/backend/kittygram_backend, с помощью Nano откройте файл settings.py и добавьте в список ALLOWED_HOSTS полученное доменное имя:
-```
-ALLOWED_HOSTS = ['xxx.xxx.xxx.xxx', '127.0.0.1', 'localhost', 'ваш-домен'] 
-# Вместо xxx.xxx.xxx.xxx — IP вашего сервера.
-# Домен вводится в формате 'project.hopto.org'.
-```
-Сохраните изменения и перезапустите Gunicorn командой sudo systemctl restart gunicorn, чтобы изменения вступили в силу.
 
-Измените конфигурационный файл Nginx. Откройте его в Nano:
+## Adding a domain name to Django settings
+On the server, go to the /infra_sprint1/backend/kittygram_backend directory, use Nano to open the settings.py file and add the resulting domain name to the ALLOWED_HOSTS list:
+```
+ALLOWED_HOSTS = ['xxx.xxx.xxx.xxx', '127.0.0.1', 'localhost', 'your-domain']
+# Replace xxx.xxx.xxx.xxx with your server's IP.
+# The domain is entered in the format 'project.hopto.org'.
+```
+Save the changes and restart Gunicorn with the command sudo systemctl restart gunicorn for the changes to take effect.
+
+Edit the Nginx configuration file. Open it in Nano:
 ```
 sudo nano /etc/nginx/sites-enabled/default
 ```
-Найдите в файле строку, которая начинается с server_name. Там уже указан IP, через пробел добавьте выданное вам доменное имя без < >:
+Find the line in the file that begins with server_name. The IP is already specified there, add the domain name assigned to you after a space:
 ```
 server {
 ...
-    server_name <ваш-ip> <ваш-домен>;
+    server_name <your-ip> <your-domain>;
 ...
 }
 ```
 После этого проверьте конфигурацию sudo nginx -t и перезагрузите её командой sudo systemctl reload nginx, чтобы изменения вступили в силу.
-## Шифрование. HTTPS
-SSL-сертификат от Let’s Encrypt можно установить на веб-сервер вручную, но можно и автоматизировать этот процесс. Для этого вам понадобится специальное ПО, например пакет certbot — его предоставляет центр сертификации Let’s Encrypt специально для Linux-систем.
-Чтобы установить certbot, вам понадобится пакетный менеджер snap. Установите его командой:
+
+## Encryption. HTTPS
+You can install an SSL certificate from Let’s Encrypt on a web server manually, but you can also automate this process. To do this, you will need special software, for example, the certbot package - it is provided by the Let’s Encrypt certification center specifically for Linux systems.
+To install certbot, you will need the snap package manager. Install it with the command:
 ```
 sudo apt install snapd
 ```
-Далее сервер, скорее всего, попросит вам перезагрузить операционную систему. Сделайте это, а потом последовательно выполните команды:
+Then the server will most likely ask you to reboot the operating system. Do this, and then sequentially run the commands:
 ```
-# Установка и обновление зависимостей для пакетного менеджера snap.
+# Installing and updating dependencies for the snap package manager.
 sudo snap install core; sudo snap refresh core
-# При успешной установке зависимостей в терминале выведется:
-# core 16-2.58.2 from Canonical✓ installed 
+# If the dependencies are successfully installed, the terminal will display:
+# core 16-2.58.2 from Canonical✓ installed
 
-# Установка пакета certbot.
+# Installing the certbot package.
 sudo snap install --classic certbot
-# При успешной установке пакета в терминале выведется:
+# If the package is successfully installed, the terminal will display:
 # certbot 2.3.0 from Certbot Project (certbot-eff✓) installed
 
-# Создание ссылки на certbot в системной директории,
-# чтобы у пользователя с правами администратора был доступ к этому пакету.
+# Create a link to certbot in the system directory,
+# so that a user with administrator rights has access to this package.
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
-Чтобы начать процесс получения сертификата, введите команду:
+To start the process of obtaining a certificate, enter the command:
 ```
 sudo certbot --nginx
 ```
-Далее система оповестит вас о том, что учётная запись зарегистрирована и попросит указать имена, для которых вы хотели бы активировать HTTPS:
+Then the system will notify you that the account has been registered and ask you to specify the names for which you would like to activate HTTPS:
 ```
 Account registered.
 
 Which names would you like to activate HTTPS for?
 We recommend selecting either all domains, or all domains in a VirtualHost/server block.
 
-1: <доменное_имя_вашего_проекта>
+1: <your_project_domain_name>
 
 Select the appropriate numbers separated by commas and/or spaces, or leave input
 blank to select all options shown (Enter 'c' to cancel):
 ```
-Введите 1 или не вводите ничего и нажмите Enter.
-После этого certbot отправит ваши данные на сервер Let's Encrypt, и там будет выпущен сертификат, который автоматически сохранится на вашем сервере в системной директории /etc/ssl/. Также будет автоматически изменена конфигурация Nginx: в файл /etc/nginx/sites-enabled/default добавятся новые настройки и будут прописаны пути к сертификату.
-Откройте файл /etc/nginx/sites-enabled/default и убедитесь в этом:
+Enter 1 or leave nothing and press Enter.
+After that, certbot will send your data to the Let's Encrypt server, where a certificate will be issued, which will be automatically saved on your server in the system directory /etc/ssl/. The Nginx configuration will also be automatically changed: new settings will be added to the /etc/nginx/sites-enabled/default file and the paths to the certificate will be specified.
+Open the /etc/nginx/sites-enabled/default file and make sure of this:
 ```
 server {
     server_name 158.160.91.227 kittydo.zapto.org;
@@ -364,7 +374,7 @@ server {
         root /var/www/kittygram;
     }
 
-# Далее идут новые настройки и описание путей к сертификату.
+# Next come new settings and a description of the paths to the certificate.
 
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/kittydo.zapto.org/fullchain.pem; # managed by Certbot
@@ -384,19 +394,19 @@ server {
     listen 80;
     return 404; # managed by Certbot
 
-
 }
 ```
-Перезагрузите конфигурацию Nginx:
+Reload the Nginx configuration:
 ```
 sudo systemctl reload nginx
 ```
-Настройка автоматического обновления SSL-сертификата. Срок действия SSL-сертификатов ограничен: например, сертификат от Let’s Encrypt действует 90 дней. Но обновлять его вручную вам не придётся, это будет делать за вас пакет certbot, если в его конфигурации ничего не менялось. 
-Чтобы узнать актуальный статус сертификата и сколько дней осталось до его перевыпуска, используйте команду:
+Configuring automatic renewal of the SSL certificate. SSL certificates have a limited validity period: for example, a certificate from Let’s Encrypt is valid for 90 days. But you don’t have to renew it manually, the certbot package will do it for you if nothing has changed in its configuration.
+
+To find out the current status of the certificate and how many days are left until its reissue, use the command:
 ```
 sudo certbot certificates
 ```
-Вывод в терминал будет примерно таким:
+The output in the terminal will be something like this:
 ```
 Found the following certs:
   Certificate Name: ваше_доменное_имя
@@ -407,43 +417,43 @@ Found the following certs:
     Certificate Path: /etc/letsencrypt/live/ваше_доменное_имя/fullchain.pem
     Private Key Path: /etc/letsencrypt/live/ваше_доменное_имя/privkey.pem
 ```
-Теперь убедитесь, что сертификат будет обновляться автоматически:
+Now make sure that the certificate will be renewed automatically:
 ```
 sudo certbot renew --dry-run
 ```
-Если не выведется ошибка, значит, всё в порядке.
-Вручную сертификат можно обновить командой:
+If no error is displayed, then everything is fine.
+You can manually renew the certificate with the command:
 ```
 sudo certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"
 ```
-Эта команда обновит сертификат и перезапустит nginx.
+This command will renew the certificate and restart nginx.
 
-## Полезные команды:
-Остановить процессы:
+## Useful commands:
+Stop processes:
 ```
-pkill gunicorn (или номер процесса)
+pkill gunicorn (or process number)
 ```
-чем занят порт
+what is the port busy with
 ```
 sudo lsof -i tcp:8080
 ```
-освободить порт
+free the port
 ```
 sudo fuser -k 8080/tcp
 ```
-остановить Django server
+stop Django server
 ```
 pkill -f runserver
-```        
-проверить место на сервере
+```
+check space on the server
 ```
 sudo df
 ```
-копировал на сервер файлы:
+copied files to the server:
 ```
 scp -i "C:\Dev\vm_access\yc-khadakhanoff"/yc-khadakhanoff docs \
-    yc-user@158.160.91.227:/home/yc-user/foodgram/docs
+yc-user@158.160.91.227:/home/yc-user/foodgram/docs
 ```
 
-# Об авторе
-Автор проекта: [khadakhan](https://github.com/khadakhan/)
+# About the author
+Project author: [khadakhan](https://github.com/khadakhan/)
