@@ -445,5 +445,5 @@ scp -i "C:\Dev\vm_access\yc-khadakhanoff"/yc-khadakhanoff docs \
     yc-user@158.160.91.227:/home/yc-user/foodgram/docs
 ```
 
-
+# Об авторе
 Автор проекта: [khadakhan](https://github.com/khadakhan/)
